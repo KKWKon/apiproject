@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.apiproject.mapper.TransactionMapper">
+    <resultMap id="BaseResultMap" type="com.api.apiproject.model.Transaction" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="account_number" property="accountNumber" jdbcType="VARCHAR" />
+        <result column="trx_amount" property="trxAmount" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="trx_date" property="trxDate" jdbcType="VARCHAR" />
+        <result column="trx_time" property="trxTime" jdbcType="BIGINT" />
+        <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, account_number, trx_amount, description, trx_date, trx_time, customer_id
+    </sql>
+
+    <update id="updateTransactionById" parameterType="com.api.apiproject.model.Transaction">
+        UPDATE transaction
+        SET description = #{description}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectTransactions" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumns"/>
+        FROM transaction
+        <where>
+            <if test="transaction.customerId != null and transaction.customerId != ''">
+                AND customer_id = #{transaction.customerId}
+            </if>
+            <if test="transaction.accountNumber != null and transaction.accountNumber != ''">
+                AND account_number = #{transaction.accountNumber}
+            </if>
+            <if test="transaction.description != null and transaction.description != ''">
+                <bind name="pattern" value="'%' + transaction.description + '%'" />
+                AND description LIKE #{pattern}
+            </if>
+        </where>
+        <if test="limit != null">
+            LIMIT #{limit}
+            <if test="offset!= null">
+                OFFSET #{offset}
+            </if>
+        </if>
+
+    </select>
+
+</mapper>

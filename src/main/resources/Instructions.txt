@@ -1,0 +1,54 @@
+1) Call API to retrieve JWT token
+http://127.0.0.1:8081/apiproject/login?username=admin&password=abcd1234
+
+
+
+2) Add bearer token to Authorization header before calling the other APIs
+
+
+
+3) To get all transactions
+http://127.0.0.1:8081/apiproject/getAllTransactions
+
+
+
+4) To get all transactions with paging
+http://127.0.0.1:8081/apiproject/getAllTransactionsByPaging?paginationLimit=1&paginationOffset=3
+
+
+
+5) To get transactions with filters
+http://127.0.0.1:8081/apiproject/getFilteredTransactions
+Sample json body:
+{
+    "customerId": "222",
+    "accountNumber": "8872838283",
+    "description": "FUND TRANSFER",
+    "paginationLimit": "3",
+    "paginationOffset": "1"
+}
+
+
+
+6) To update single transaction
+http://127.0.0.1:8081/apiproject/updateTransactionById?id=1&description=TEST
+
+
+
+7) To update multiple transactions
+http://127.0.0.1:8081/apiproject/updateTransactionByBatchIds
+Sample json body:
+[
+    {
+        "id": "1",
+        "description": "TEST 1"
+    },
+    {
+        "id": "2",
+        "description": "TEST 2"
+    },
+    {
+        "id": "3",
+        "description": "TEST 3"
+    }
+]

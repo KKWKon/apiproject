@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /apiproject
+
+spring:
+  application:
+    name: apiproject
+  profiles:
+    active: local
+
+mybatis:
+  mapper-locations: classpath*:mybatis/mapper/**/*.xml
+

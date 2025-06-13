@@ -1,0 +1,39 @@
+1) Singleton pattern
+Singleton pattern is whereby a class has only one instance created and is used throughout the lifecycle of the webapp.
+Spring creates a singleton instance by default when a class is declared as a bean using annotation such as @Service.
+I chose to use singleton pattern to ensure memory can be used more efficiently.
+
+2) Builder pattern
+Builder pattern is whereby variables can optionally be added to the builder of a class before instantiating the accessor
+class.
+In this project, Lombok is used to create the builders while having minimal boilerplate codes.
+I chose to use builder pattern to have more flexibility in populating variables into the accessor class before
+instantiating it.
+Example in this project is the Transaction class, it is built with different variables populated depending on the usage.
+
+3) Strategy pattern
+Strategy pattern is whereby the implementation logic is passed in for a function.
+I chose to use strategy pattern to allow for flexibility for future expansion and changes by passing in new
+implementations without changing the core logic.
+Example in this project is the AuthenticationStrategy class which is passed into the LoginService.isUserValid method.
+Currently, LocalAuthenticationStrategy is the strategy passed in, in the future a different authentication strategy can
+be passed in without much changes.
+
+4) DAO pattern
+DAO pattern is whereby a layer is created between the service and database layers to interface with the database.
+I chose to use DAO pattern to ensure a separation of logic with the service layer whereby the DAO layer is dedicated for
+database interactions which results in a cleaner structure overall.
+In addition to that, this extra layer can reduce the chances of circular dependency.
+
+5) Dependency injection pattern
+Dependency injection pattern is whereby implementations of different classes are passed in a class to use.
+In this project, Spring constructor dependency injection is used whereby Spring injects the specified beans into the
+constructor of a bean class. Lombok is used here to reduce boilerplate codes.
+I chose to use dependency injection pattern to ensure the logics are more loosely coupled and to increase code
+readability, maintainability and reusability.
+
+6) MVC pattern
+MVC pattern is whereby the model, view and controller layers are separated whereby each layer has its own responsibility.
+I chose to use MVC pattern to ensure the structure is clearer and cleaner. The controllers' sole responsibility is to
+handle incoming requests, direct to the services, and return the result. The controllers should be clean and have
+minimal logic while the model layer handles most of the logic.
